@@ -15,8 +15,6 @@ kotlin {
             configure(listOf(compilations["main"], compilations["test"])) {
                 (tasks.getByName(compileKotlinTaskName) as Kotlin2JsCompile).kotlinOptions {
                     moduleKind = "umd"
-                    metaInfo = false
-                    sourceMap = false
                 }
             }
             webpackTask {
@@ -49,6 +47,10 @@ kotlin {
 val PRODUCTION_DIR = "build/production"
 tasks {
     named("jsBrowserWebpack") {
+        dependsOn("runDceJsKotlin")
+    }
+
+    named("jsBrowserTest") {
         dependsOn("runDceJsKotlin")
     }
 

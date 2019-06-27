@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-./gradlew buildProduction
-du -sh build/production/*
+#rm -rf build
+./gradlew clean
 ./gradlew runProduction
+du -sh build/production/*
