@@ -55,6 +55,7 @@ tasks {
     register("buildProduction", Copy::class.java) {
         setDescription("generate directory $PRODUCTION_DIR")
         dependsOn("jsBrowserWebpack")
+        dependsOn("jsBrowserTest")
         from("build/libs") {
             include("*.js")
         }
