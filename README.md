@@ -5,7 +5,7 @@ Sampe of usage kotlin 1.3.40 mpp with js browser configuration
 http://localhost:8080  
   
 #### run production mode (with minified JS output):  
-`./gradlew runProd`
+`./gradlew runProduction`
 http://localhost:8081/index.html  
 
 #### run JS tests:

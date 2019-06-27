@@ -21,7 +21,7 @@ kotlin {
             }
             webpackTask {
                 sourceMaps = false
-                report = true // execute src/jsTest
+                report = true //Enable execute tests src/jsTest
             }
             testTask {
                 useKarma {
@@ -46,14 +46,33 @@ kotlin {
     }
 }
 
+val PRODUCTION_DIR = "build/production"
 tasks {
-    register("runProd") {
+    named("jsBrowserWebpack") {
+        dependsOn("runDceJsKotlin")
+    }
+
+    register("buildProduction", Copy::class.java) {
+        setDescription("generate directory $PRODUCTION_DIR")
+        dependsOn("jsBrowserWebpack")
+        from("build/libs") {
+            include("*.js")
+        }
+        from("src/jsMain/resources")
+        into(PRODUCTION_DIR)
+    }
+
+    register("runProduction") {
+        setDescription("run simple web server with content: $PRODUCTION_DIR")
+
+        dependsOn("buildProduction")
         doLast {
+            val port = 8081
             SimpleHttpFileServerFactory().start(
-                    file("build/result"),
-                    8081
+                    file(PRODUCTION_DIR),
+                    port
             )
-            println("Open http://localhost:8081/index.html")
+            println("Open http://localhost:$port/index.html")
             Thread.sleep(Long.MAX_VALUE)
         }
     }
