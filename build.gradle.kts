@@ -64,7 +64,6 @@ tasks {
 
     register("runProduction") {
         setDescription("run simple web server with content: $PRODUCTION_DIR")
-
         dependsOn("buildProduction")
         doLast {
             val port = 8081
@@ -75,5 +74,9 @@ tasks {
             println("Open http://localhost:$port/index.html")
             Thread.sleep(Long.MAX_VALUE)
         }
+    }
+
+    named("build") {
+        dependsOn("buildProduction")
     }
 }
