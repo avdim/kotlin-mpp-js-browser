@@ -45,6 +45,9 @@ tasks.withType<Kotlin2JsCompile> {
 
 val PRODUCTION_DIR = "build/production"
 tasks {
+    named("jsBrowserRun") {
+        dependsOn("runDceJsKotlin")
+    }
     named("jsBrowserWebpack") {
         dependsOn("runDceJsKotlin")
     }
