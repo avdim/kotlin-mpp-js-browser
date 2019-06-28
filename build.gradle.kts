@@ -39,10 +39,6 @@ kotlin {
     }
 }
 
-tasks.withType<Kotlin2JsCompile> {
-    kotlinOptions.moduleKind = "umd"
-}
-
 val PRODUCTION_DIR = "build/production"
 tasks {
     named("jsBrowserRun") {
