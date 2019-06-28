@@ -10,6 +10,7 @@ http://localhost:8081/index.html
 
 #### production build:  
 `./gradlew buildProduction`
+all used files copied to build/production
 
 #### run JS tests:
 `./gradlew jsBrowserTest`  
