@@ -6,8 +6,8 @@ http://localhost:8080
   
 #### run production mode (with minified JS):  
 `./gradlew runProduction`  
-or `./gradlew runProduction -t` for life code sync
-http://localhost:8081/index.html
+http://localhost:8081/index.html  
+or `./gradlew runProduction -t` for life code sync  
 
 #### production build:  
 `./gradlew buildProduction`  
