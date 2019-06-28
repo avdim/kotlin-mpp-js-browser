@@ -12,13 +12,8 @@ repositories {
 kotlin {
     js {
         browser {
-            configure(listOf(compilations["main"], compilations["test"])) {
-                (tasks.getByName(compileKotlinTaskName) as Kotlin2JsCompile).kotlinOptions {
-                    moduleKind = "umd"
-                }
-            }
             webpackTask {
-                sourceMaps = false
+                sourceMaps = false//todo turn off only in production mode
                 report = true //Enable execute tests src/jsTest
             }
             testTask {
@@ -44,16 +39,18 @@ kotlin {
     }
 }
 
+tasks.withType<Kotlin2JsCompile> {
+    kotlinOptions.moduleKind = "umd"
+}
+
 val PRODUCTION_DIR = "build/production"
 tasks {
     named("jsBrowserWebpack") {
         dependsOn("runDceJsKotlin")
     }
-
     named("jsBrowserTest") {
         dependsOn("runDceJsKotlin")
     }
-
     register("buildProduction", Copy::class.java) {
         setDescription("generate directory $PRODUCTION_DIR")
         dependsOn("jsBrowserWebpack")
@@ -64,7 +61,6 @@ tasks {
         from("src/jsMain/resources")
         into(PRODUCTION_DIR)
     }
-
     register("runProduction") {
         setDescription("run simple web server with content: $PRODUCTION_DIR")
         dependsOn("buildProduction")
@@ -78,7 +74,6 @@ tasks {
             Thread.sleep(Long.MAX_VALUE)
         }
     }
-
     named("build") {
         dependsOn("buildProduction")
     }
