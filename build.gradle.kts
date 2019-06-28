@@ -13,8 +13,8 @@ kotlin {
     js {
         browser {
             webpackTask {
-                sourceMaps = false//todo turn off only in production mode
-                report = true //Enable execute tests src/jsTest
+                sourceMaps = false // Set 'true' if need debug
+                report = true // Enable execute tests src/jsTest
             }
             testTask {
                 useKarma {
@@ -66,10 +66,7 @@ tasks {
         dependsOn("buildProduction")
         doLast {
             val port = 8081
-            SimpleHttpFileServerFactory().start(
-                    file(PRODUCTION_DIR),
-                    port
-            )
+            SimpleHttpFileServerFactory().start(file(PRODUCTION_DIR), port)
             println("Open http://localhost:$port/index.html")
             Thread.sleep(Long.MAX_VALUE)
         }
