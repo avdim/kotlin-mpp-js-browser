@@ -3,11 +3,11 @@ Sampe of usage kotlin 1.3.40 mpp with js browser configuration
 #### run development mode:  
 `./gradlew jsBrowserRun`  
 http://localhost:8080  
+or `./gradlew jsBrowserRun -t` for life code sync  
   
 #### run production mode (with minified JS):  
 `./gradlew runProduction`  
 http://localhost:8081/index.html  
-or `./gradlew runProduction -t` for life code sync  
 
 #### production build:  
 `./gradlew buildProduction`  
